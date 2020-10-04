@@ -6,8 +6,10 @@ defmodule TsungDemo.Application do
   use Application
 
   def start(_type, _args) do
+    http_port = Application.get_env(:tsung_demo, :http_port)
+
     children = [
-      {Plug.Cowboy, scheme: :http, plug: TsungDemo.Router, options: [port: 4001]},
+      {Plug.Cowboy, scheme: :http, plug: TsungDemo.Router, options: [port: http_port]},
       {TsungDemo.DB, []}
     ]
 
